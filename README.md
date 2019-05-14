@@ -43,38 +43,38 @@ Deck Of Cards Assignment from Appian
 ### Card
  **Card** class is the representation of a poker-style card.
 #### Data Members
-     mSuit //(Defined as enum PokerSuit: Hearts, Spades, Diamonds, Clubs)
+     mSuit; //(Defined as enum PokerSuit: Hearts, Spades, Diamonds, Clubs)
 
-     mRank //(Defined as enum PokerRank: Ace, Two...Ten, Jack, Queen, King)
+     mRank; //(Defined as enum PokerRank: Ace, Two...Ten, Jack, Queen, King)
 
-     NUM_OF_SUIT //an enum value of PokerSuit is also defined to keep the number of suits.
+     NUM_OF_SUIT; //an enum value of PokerSuit is also defined to keep the number of suits.
 
-     NUM_OF_Rank //an enum value of PokerRank is also defined to keep the number of ranks.
+     NUM_OF_Rank; //an enum value of PokerRank is also defined to keep the number of ranks.
 #### Methods
-     getSuit(); // return the suit of the Card.
+     getSuit(); //return the suit of the Card.
 
-     getRank(); // return the rank of the Card.
+     getRank(); //return the rank of the Card.
 
  Only expose read only methods since a card shall not be changed after creation.
 #### Constructors
-     Card(iSuit, iRank); // protected
+     Card(iSuit, iRank); //protected
 
-     Card(&iCard); // protected
+     Card(&iCard); //protected
 
  Can only be created by friend classes: Deck, CardTester, DeckTester. No public constructors.
 #### Other methods and operators
      ==; and  !=;  //as friend functions, for testing purposes
 
-     getCardStr(); // protected, for testing purposes
+     getCardStr(); //protected, for testing purposes
 #### Ownership and Lifetime of Card instances
  To avoid frauds in games, the Card shall have an exclusive ownership: either it is in a Deck of Cards or it has been dealt (to a player or on the table, etc.) The Card can only be created when a Deck is created. The Deck has the sole ownership of the Card until it is dealt, which will transfer its ownership to the caller.
 
 ### Deck
  **Deck** class is the representation of a deck of poker-style card.
 #### Data Members
-     mCardUniPtrs (std::vector<std::unique_ptr<Card>>)
+     mCardUniPtrs; //(std::vector<std::unique_ptr<Card>>)
 
-     unique_ptr** is used here to ensure the exclusive ownership on Card objects.
+     //unique_ptr** is used here to ensure the exclusive ownership on Card objects.
 #### Methods
      getSize(); //return the remaining number of Cards in the Deck.
 
@@ -83,14 +83,14 @@ Deck Of Cards Assignment from Appian
      dealOneCard(); //return the Card on top of the Deck, return no Card if Deck is empty.
 
 #### Constructors
-     Deck(); //Default constructor, public
+     Deck(); //default constructor, public
 
-     Deck(&iDeck); // copy constructor, protected
+     Deck(&iDeck); //copy constructor, protected
 
  The copy constructor can only be invoked by friend classes for testing purposes.
 
 #### Other methods and operators
-     getDeckStr(); // protected, for testing purposes
+     getDeckStr(); //protected, for testing purposes
 
 #### Ownership and Lifetime of Deck instances
  Similar to Cards, the lifetime and ownership of Deck shall also be handled with care in the system. Generally one Deck shall be managed/handled by one owner only.
