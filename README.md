@@ -41,7 +41,7 @@ Deck Of Cards Assignment from Appian
 ## Design
 
 ### Card
- **Card** class is the representation of a poker-style card.
+ **Card** class is the representation of a poker-style cards.
 #### Data Members
      mSuit; //(Defined as enum PokerSuit: Hearts, Spades, Diamonds, Clubs)
 
@@ -95,7 +95,7 @@ Deck Of Cards Assignment from Appian
 #### Ownership and Lifetime of Deck instances
  Similar to Cards, the lifetime and ownership of Deck shall also be handled with care in the system. Generally one Deck shall be managed/handled by one owner only.
 
- _Note: This in the current design and implementation, thread safety is not considered. If in some cases concurrent accessing to one Deck is necessary, Smart locks can be added to all the member functions, but it might be more expensive._
+ _Note: In line with the exclusive ownership, in the current design and implementation, thread safety is not considered. If in some cases concurrent accessing to one Deck is necessary, Smart locks can be added to all the member functions, but it might be more expensive._
 
 ### CardTester and DeckTester
  These are testing classes for Card and Deck Objects. They are friend classes of the two main classes and thus can access the non-public members and methods of the main classes.
