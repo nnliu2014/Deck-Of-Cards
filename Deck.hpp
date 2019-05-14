@@ -56,7 +56,7 @@ protected:
     // Copy constructor for testing purposes
     Deck(Deck &iDeck);
     // Return the whole Deck as a string, for testing purposes. The order is the same with card dealing.
-    void deckStr(std::string &oStr);
+    void getDeckStr(std::string &oStr);
     
 public:
     // Only a default constructor (with no parameters) as all cards will be created automatically.

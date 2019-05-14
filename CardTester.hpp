@@ -11,7 +11,7 @@
 //  Description: Testing class for Card class.
 //  1. testCardCreation will check if the Card created will have the right suit and rank.
 //  2. testCardValue will check if the correct value of suit and rank can be retrieved.
-//  3. testCardcomparison will test the == and != operators.
+//  3. testCardComparison will test the == and != operators.
 //  Several hardcoded cases will be tested in each function.
 
 #ifndef CardTester_hpp

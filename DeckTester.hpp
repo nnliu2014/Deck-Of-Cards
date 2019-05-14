@@ -16,7 +16,7 @@
 //      Correctness of the Cards is not checked since only the contructor can create Cards.
 //  3. testDeckShuffleRandomness will check if multiple calls to shuffle will generate different
 //     random permutations. This is to ensure the fairness of the game.
-//  4. testMultipleDeckShuff will check if shuffle calls to multiple Decks will generate different
+//  4. testMultipleDeckShuffle will check if shuffle calls to multiple Decks will generate different
 //     random permutations. This is also to ensure the fairness of the game.
 //  5. testDealOneCard will test the case of dealing from a fresh Deck or a Deck after one shuffle call.
 //  6. testDealCards will test the case where several cards are dealt continuously.

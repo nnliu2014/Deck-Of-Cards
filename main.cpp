@@ -12,10 +12,10 @@
 // face value of Ace, 2-10, Jack, Queen and King.)
 //
 // Within one of your classes, two operations need to be provided:
-// 1. shuffle() which returns no value, but results in the cards in the decck
+// 1. shuffle() which returns no value, but results in the cards in the deck
 // being randomly permuted.
 //
-// 2. dealOneCard which return one card from the deck to the caller.
+// 2. dealOneCard() which return one card from the deck to the caller.
 // Specifically, a call to shuffle followed by 52 calls to dealOneCard() should
 // result in the caller being provided all 52 cards of the deck in a random order.
 // If the caller then makes a 53rd call dealOneCard(), no card is dealt.

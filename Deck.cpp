@@ -61,7 +61,7 @@ Deck::Deck(Deck &iDeck)
 
 // Get the deck content in form of a string
 // For testing purposes only
-void Deck::deckStr(std::string &oStr){
+void Deck::getDeckStr(std::string &oStr){
     
     // Initialize output string.
     oStr.clear();

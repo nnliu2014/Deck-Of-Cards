@@ -24,7 +24,7 @@ void DeckTester::testDeckCreation(){
     Deck lDeck;
     
     std::string lDeckStr;
-    lDeck.deckStr(lDeckStr);
+    lDeck.getDeckStr(lDeckStr);
     
     ASSERT_WITH_MESSAGE((cleanDeckStr.compare(lDeckStr)== 0), "Deck creation error!\n");
 }
@@ -39,7 +39,7 @@ void DeckTester::testDeckInitialShuffle(){
     // Test Shuffle Step 1 : different than a clean Deck
     std::string lDeckStr;
     lDeck.shuffle();
-    lDeck.deckStr(lDeckStr);
+    lDeck.getDeckStr(lDeckStr);
     
     // Failed if not shuffled
     ASSERT_WITH_MESSAGE((cleanDeckStr.compare(lDeckStr)!= 0), "Deck not shuffled!\n");
@@ -74,7 +74,7 @@ void DeckTester::testDeckShuffleRandomness(){
     for(int i = 0; i<NUM_OF_SHUFFLES; i++)
     {
         lDeck.shuffle();
-        lDeck.deckStr(lDeckStr);
+        lDeck.getDeckStr(lDeckStr);
         lRet = lDeckStrSet.insert(lDeckStr);
         ASSERT_WITH_MESSAGE((lRet.second), "Duplicate Card order within multiple shuffles.\n");
         lDeckStr.clear();
@@ -93,7 +93,7 @@ void DeckTester::testMultipleDeckShuffle(){
     for(int i = 0; i<NUM_OF_DECKS; i++)
     {
         lDecks[i].shuffle();
-        lDecks[i].deckStr(lDeckStr);
+        lDecks[i].getDeckStr(lDeckStr);
         lRet = lDeckStrSet.insert(lDeckStr);
         ASSERT_WITH_MESSAGE((lRet.second), "Duplicate Card order within multiple decks.\n");
         lDeckStr.clear();
