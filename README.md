@@ -16,74 +16,82 @@ Deck Of Cards Assignment from Appian
  9 files in total
 
  IDE used is developed with Xcode version 10.2.1.
- -main.cpp
- -Card.hpp
- -Card.cpp
- -Deck.hpp
- -Deck.cpp
- -CardTester.hpp
- -CardTester.cpp
- -DeckTester.hpp
- -DeckTester.cpp
+
+ 1. main.cpp
+ 2. Card.hpp
+ 3. Card.cpp
+ 4. Deck.hpp
+ 5. Deck.cpp
+ 6. CardTester.hpp
+ 7. CardTester.cpp
+ 8. DeckTester.hpp
+ 9. DeckTester.cpp
 
 ## Installation
- Source code can be imported into a Xcode c++ Command Line Tool Project.
+ Source code can be imported into a Xcode c++ Command Line Tool project.
  Only standard libraries are used.
 
 ## Execution/Testing
  **main()** in main.cpp serve as the unit test executor.
- Testing result will be printed to the output.
- There will be assertion with messages when test failed.
+
+ Testing result will be printed to the output. There will be assertion with messages when test failed.
 
  _Note: Xcode's unit test framework, XCTest, is not very friendly with c++ project testing. It is more commonly used for UI testing and swift. Thus a more generic c++ project (not IDE dependent) is created for testing purposes._
 
 ## Design
 
 ### Card
- Card class is the representation of a poker-style card.
+ **Card** class is the representation of a poker-style card.
 #### Data Members
- -**mSuit** (Defined as enum PokerSuit: Hearts, Spades, Diamonds, Clubs)
+     **mSuit** (Defined as enum PokerSuit: Hearts, Spades, Diamonds, Clubs)
 
- -**mRank** (Defined as enum PokerRank: Ace, Two...Ten, Jack, Queen, King)
+     **mRank** (Defined as enum PokerRank: Ace, Two...Ten, Jack, Queen, King)
 
- -**NUM_OF_SUIT**, an enum value of PokerSuit is also defined to keep the number of suits.
+     **NUM_OF_SUIT**, an enum value of PokerSuit is also defined to keep the number of suits.
 
- -**NUM_OF_Rank**, an enum value of PokerRank is also defined to keep the number of ranks.
+     **NUM_OF_Rank**, an enum value of PokerRank is also defined to keep the number of ranks.
 #### Methods
- -**getSuit();** return the suit of the Card.
- 
- -**getRank();** return the rank of the Card.
+    **getSuit();** return the suit of the Card.
+
+    **getRank();** return the rank of the Card.
 
  Only expose read only methods since a card shall not be changed after creation.
 #### Constructors
- -**Card(iSuit, iRank);** protected
+    **Card(iSuit, iRank);** protected
 
- -**Card(&iCard);** protected
+    **Card(&iCard);** protected
 
  Can only be created by friend classes: Deck, CardTester, DeckTester. No public constructors.
 #### Other methods and operators
- -**==** and **!=** as friend function, for testing purposes
+    **==** and **!=** as friend functions, for testing purposes
 
- -**getCardStr();** protected, for testing purposes
+    **getCardStr();** protected, for testing purposes
 #### Ownership and Lifetime of Card instances
- To avoid fraud in games, the Card shall have an exclusive ownership: either it is in a Deck of Cards or it has been dealt (to a player or on the table, etc.) The Card can only be created when a Deck is created. The Deck has the sole ownership of the Card until it is dealt, which will transfer its ownership to the caller.
+ To avoid frauds in games, the Card shall have an exclusive ownership: either it is in a Deck of Cards or it has been dealt (to a player or on the table, etc.) The Card can only be created when a Deck is created. The Deck has the sole ownership of the Card until it is dealt, which will transfer its ownership to the caller.
 
 ### Deck
  Deck class is the representation of a deck of poker-style card.
 #### Data Members
- -**mCardUniPtrs** (std::vector<std::unique_ptr<Card>>)
- -**unique_ptr** is used here to ensure the exclusive ownership on Card objects.
+    **mCardUniPtrs** (std::vector<std::unique_ptr<Card>>)
+
+    **unique_ptr** is used here to ensure the exclusive ownership on Card objects.
 #### Methods
- -**getSize();** return the remaining number of Cards in the Deck.
- -**shuffle();** randomly permute the Cards remained in the Deck.
- -**dealOneCard();** return the Card on top of the Deck, return no Card if Deck is empty.
+    **getSize();** return the remaining number of Cards in the Deck.
+
+    **shuffle();** randomly permute the Cards remained in the Deck.
+
+    **dealOneCard();** return the Card on top of the Deck, return no Card if Deck is empty.
+
 #### Constructors
- -**Deck();** Default constructor, public
- -**Deck(&iDeck);** copy constructor, protected
+    **Deck();** Default constructor, public
+
+    **Deck(&iDeck);** copy constructor, protected
 
  The copy constructor can only be invoked by friend classes for testing purposes.
+
 #### Other methods and operators
- -**getDeckStr();** protected, for testing purposes
+    **getDeckStr();** protected, for testing purposes
+
 #### Ownership and Lifetime of Deck instances
  Similar to Cards, the lifetime and ownership of Deck shall also be handled with care in the system. Generally one Deck shall be managed/handled by one owner only.
 
@@ -93,7 +101,7 @@ Deck Of Cards Assignment from Appian
  These are testing classes for Card and Deck Objects. They are friend classes of the two main classes and thus can access the non-public members and methods of the main classes.
 
 ## Testing
- There are 3 unit tests defined for Card and 8 unit tests for Deck, as Described below:
+ There are 3 unit tests defined for Card and 8 unit tests for Deck, as described below:
 
 ### Unit tests for Card
  1. **testCardCreation** will check if the Card created will have the right suit and rank.
