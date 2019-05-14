@@ -72,25 +72,25 @@ Deck Of Cards Assignment from Appian
 ### Deck
  **Deck** class is the representation of a deck of poker-style card.
 #### Data Members
-    **mCardUniPtrs** (std::vector<std::unique_ptr<Card>>)
+     mCardUniPtrs (std::vector<std::unique_ptr<Card>>)
 
-    **unique_ptr** is used here to ensure the exclusive ownership on Card objects.
+     unique_ptr** is used here to ensure the exclusive ownership on Card objects.
 #### Methods
-    **getSize();** return the remaining number of Cards in the Deck.
+     getSize(); //return the remaining number of Cards in the Deck.
 
-    **shuffle();** randomly permute the Cards remained in the Deck.
+     shuffle(); //randomly permute the Cards remained in the Deck.
 
-    **dealOneCard();** return the Card on top of the Deck, return no Card if Deck is empty.
+     dealOneCard(); //return the Card on top of the Deck, return no Card if Deck is empty.
 
 #### Constructors
-    **Deck();** Default constructor, public
+     Deck(); //Default constructor, public
 
-    **Deck(&iDeck);** copy constructor, protected
+     Deck(&iDeck); // copy constructor, protected
 
  The copy constructor can only be invoked by friend classes for testing purposes.
 
 #### Other methods and operators
-    **getDeckStr();** protected, for testing purposes
+     getDeckStr(); // protected, for testing purposes
 
 #### Ownership and Lifetime of Deck instances
  Similar to Cards, the lifetime and ownership of Deck shall also be handled with care in the system. Generally one Deck shall be managed/handled by one owner only.
