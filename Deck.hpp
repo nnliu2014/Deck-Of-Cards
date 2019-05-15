@@ -26,11 +26,11 @@
 //  will be returned. The caller need to check the content of the unique_ptr to check if a Card is dealt
 //  successfully.
 //
-//  5. getSize() will return the numbe of Cards, currently in the Deck.
+//  5. getSize() will return the numbe of Cards currently in the Deck.
 //
 //  Other considerations:
 //  Thread safty is not considered in this design as the ownership of Deck shall also be exclusive.
-//  One Deck can only be in one hand.
+//  One Deck can only be in one hand. In case concurrent access is needed, locks should be added.
 
 #ifndef Deck_hpp
 #define Deck_hpp
@@ -49,7 +49,7 @@ private:
     // Use a vector to hold unique_ptrs to Cards
     // This ensures the Deck has the single ownership of the Cards.
     // When a Card is dealt, its ownership is transferred to the caller.
-    // This helps to prevent the memory leak at abnormal cases and exceptions.
+    // This also helps to prevent the memory leak at abnormal cases and exceptions.
     std::vector<std::unique_ptr<Card>> mCardUniPtrs;
     
 protected:
@@ -63,7 +63,7 @@ public:
     // Get the number of Cards in the Deck.
     int getSize();
     
-    // Shuffle method will do a permutation of the remain Cards in the deck.
+    // Shuffle method will do a permutation of the remaining Cards in the deck.
     void shuffle();
     
     // Deal the Card at the top of the deck (when Card front with suit and rank facing downwards).

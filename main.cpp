@@ -7,6 +7,7 @@
 //
 
 // Assignment Description
+//
 // Implement a set of classes that represent a deck of poker-style paying cards.
 // (Fifty-two playing cards in four suits: hearts, spades, clubs, diamonds with
 // face value of Ace, 2-10, Jack, Queen and King.)
@@ -26,13 +27,16 @@
 #include "CardTester.hpp"
 #include "DeckTester.hpp"
 
-// Can be used to toggle the tests.
+// Following flags can be used to toggle the tests.
 #define TEST_CARD
 #define TEST_DECK
 
 // main() serves as the unit tests executor for this assignment.
 // The program will stop at assertion failures.
-// For details of each test, please check the README.md, CardTester.hpp and DeckTester.hpp.
+// For details of each classes and their tester classes, please check
+// README.md
+// Card.hpp, Deck.hpp
+// CardTester.hpp and DeckTester.hpp.
 
 int main(int argc, const char * argv[]) {
     

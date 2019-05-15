@@ -9,7 +9,7 @@
 //  Class Name : DeckTester
 //
 //  Description: Testing class for Deck class.
-//  1. testDeckCreation will check if the Deck created will have all the Cards created correctly.
+//  1. testDeckCreation will check if a new Deck has all the Cards created correctly.
 //  2. testInitialShuffle will check:
 //      a. a permutation is done
 //      b. no duplicated Cards
@@ -18,7 +18,7 @@
 //     random permutations. This is to ensure the fairness of the game.
 //  4. testMultipleDeckShuffle will check if shuffle calls to multiple Decks will generate different
 //     random permutations. This is also to ensure the fairness of the game.
-//  5. testDealOneCard will test the case of dealing from a fresh Deck or a Deck after one shuffle
+//  5. testDealOneCard will test the case of dealing from a fresh Deck and a Deck after one shuffle
 //     call.
 //  6. testDealCards will test the case where several Cards are dealt continuously.
 //  7. testDealEmptyDeck will test the case when dealOneCard() is called when the Deck is empty.
@@ -57,10 +57,9 @@ public:
     void testDealOneCard();
     
     // Test dealing of multiple Cards continuously.
-    // It also tests getSize().
     void testDealCards();
     
-    // Test the return when dealOneCard is called on an empty Deck.
+    // Test the returned Card when dealOneCard is called on an empty Deck.
     void testDealEmptyDeck();
     
     // Test the shuffling after some Cards are dealt.

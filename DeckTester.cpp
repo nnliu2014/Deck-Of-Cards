@@ -21,8 +21,8 @@ void DeckTester::testDeckCreation(){
     // This is the expected result when a new Deck is created.
     std::string cleanDeckStr = "3.12 3.11 3.10 3.9 3.8 3.7 3.6 3.5 3.4 3.3 3.2 3.1 3.0 2.12 2.11 2.10 2.9 2.8 2.7 2.6 2.5 2.4 2.3 2.2 2.1 2.0 1.12 1.11 1.10 1.9 1.8 1.7 1.6 1.5 1.4 1.3 1.2 1.1 1.0 0.12 0.11 0.10 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1 0.0";
     
+    // Create a new Deck and get its content as a string.
     Deck lDeck;
-    
     std::string lDeckStr;
     lDeck.getDeckStr(lDeckStr);
     
@@ -35,11 +35,12 @@ void DeckTester::testDeckInitialShuffle(){
     // This is the expected string for a new Deck.
     std::string cleanDeckStr = "3.12 3.11 3.10 3.9 3.8 3.7 3.6 3.5 3.4 3.3 3.2 3.1 3.0 2.12 2.11 2.10 2.9 2.8 2.7 2.6 2.5 2.4 2.3 2.2 2.1 2.0 1.12 1.11 1.10 1.9 1.8 1.7 1.6 1.5 1.4 1.3 1.2 1.1 1.0 0.12 0.11 0.10 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1 0.0";
     
+    // Create a new Deck and shuffle it.
     Deck lDeck;
+    lDeck.shuffle();
     
     // Test Shuffle Step 1 : different than a clean Deck
     std::string lDeckStr;
-    lDeck.shuffle();
     lDeck.getDeckStr(lDeckStr);
     
     // Failed if two strings are the same.
@@ -48,7 +49,7 @@ void DeckTester::testDeckInitialShuffle(){
     // Test Shuffle Step 2 : correct number of Cards;
     ASSERT_WITH_MESSAGE((lDeck.getSize() == (NUM_OF_RANK*NUM_OF_SUIT)), "Wrong number of Cards after shuffle!\n");
     
-    // Test Shuffle Step 3: no repeating element
+    // Test Shuffle Step 3: no repeating elements
     std::set<std::string> lCardSet;
     std::pair<std::set<std::string>::iterator,bool> lRet;
     
@@ -66,13 +67,14 @@ void DeckTester::testDeckInitialShuffle(){
 
 // Shuffle the same Deck many times to see if a same order of Card is produced.
 void DeckTester::testDeckShuffleRandomness(){
+    // Create a new Deck
     Deck lDeck;
     
-    // Shuffle the same Deck again and again and check for duplication.
+    std::string lDeckStr;
     std::set<std::string> lDeckStrSet;
     std::pair<std::set<std::string>::iterator,bool> lRet;
     
-    std::string lDeckStr;
+    // Shuffle the same Deck again and again and check for duplication.
     for(int i = 0; i<NUM_OF_SHUFFLES; i++)
     {
         // Shuffle the Deck and then retrieve its content as a string.
@@ -82,19 +84,21 @@ void DeckTester::testDeckShuffleRandomness(){
         // lRet.second will be false if the same string already exists in the set.
         lRet = lDeckStrSet.insert(lDeckStr);
         ASSERT_WITH_MESSAGE((lRet.second), "Duplicate Card order within multiple shuffles.\n");
+        
         lDeckStr.clear();
     }
 }
 
 // Shuffle multiple Decks to see if a same order of Card is produced.
 void DeckTester::testMultipleDeckShuffle(){
+    // Create a number of Decks
     Deck lDecks[NUM_OF_DECKS];
     
-    // Shuffle the each Deck and check for duplication.
+    std::string lDeckStr;
     std::set<std::string> lDeckStrSet;
     std::pair<std::set<std::string>::iterator,bool> lRet;
     
-    std::string lDeckStr;
+    // Shuffle the each Deck and check for duplication.
     for(int i = 0; i<NUM_OF_DECKS; i++)
     {
         // Shuffle the Deck and then retrieve its content as a string.
@@ -104,6 +108,7 @@ void DeckTester::testMultipleDeckShuffle(){
         // lRet.second will be false if the same string already exists in the set.
         lRet = lDeckStrSet.insert(lDeckStr);
         ASSERT_WITH_MESSAGE((lRet.second), "Duplicate Card order within multiple decks.\n");
+        
         lDeckStr.clear();
     }
 }
@@ -125,6 +130,7 @@ void DeckTester::testDealOneCard(){
     lDeck.shuffle();
     
     // Copy the top Card
+    ASSERT_WITH_MESSAGE((lDeck.mCardUniPtrs.back().get()), "Corrupted Deck!\n");
     Card lTopCard(*lDeck.mCardUniPtrs.back());
     
     // Test dealOneCard, expecting the top Card to be returned.
@@ -143,10 +149,11 @@ void DeckTester::testDealCards(){
     while(lDeck.getSize()!=0)
     {
         // Copy the Top Card
+        ASSERT_WITH_MESSAGE((lDeck.mCardUniPtrs.back().get()), "Corrupted Deck!\n");
         Card lTopCard(*lDeck.mCardUniPtrs.back());
-        std::unique_ptr<Card> lDealtCard = lDeck.dealOneCard();
         
         // Check if the dealt Card is as expected.
+        std::unique_ptr<Card> lDealtCard = lDeck.dealOneCard();
         ASSERT_WITH_MESSAGE(lDealtCard.get(), "Dealt empty card when deck is not empty!\n");
         ASSERT_WITH_MESSAGE(lTopCard == (*lDealtCard), "Error dealing mutliple cards!\n");
     }
@@ -179,10 +186,13 @@ void DeckTester::testDeckShuffleAfterDealing(){
     Deck lDeck;
     std::string lDealtCards[10];
     
+    lDeck.shuffle();
     // Store the string of the dealt Cards in an array.
     for(int i = 0; i<10; i++)
     {
-        lDealtCards[i] = (lDeck.dealOneCard())->getCardStr();
+        std::unique_ptr<Card> lDealtCard = lDeck.dealOneCard();
+        ASSERT_WITH_MESSAGE(lDealtCard.get(), "Dealt empty card when deck is not empty!\n");
+        lDealtCards[i] = lDealtCard->getCardStr();
     }
     
     // Test shuffle: no repeating element

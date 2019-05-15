@@ -20,12 +20,12 @@ Deck::Deck()
         //Seed the random number generation at construction time
         srand((unsigned int)time(0));
         
-        // Reserve the size of the vector to avoid repeating copy and allocation
+        // Reserve the size of the vector to avoid repeating copying and allocation
         // during expansion.
         mCardUniPtrs.reserve(NUM_OF_RANK * NUM_OF_SUIT);
         for (int i = 0; i < NUM_OF_SUIT; i++){
             for (int j = 0; j < NUM_OF_RANK; j++){
-                // Create the Cards in order of the Suit and Rank.
+                // Create the Cards in order of the PokerSuit and PokerRank.
                 mCardUniPtrs.push_back(std::unique_ptr<Card>
                                        (new Card((PokerSuit)i, (PokerRank)j)));
             }
@@ -38,7 +38,7 @@ Deck::Deck()
     }
 }
 
-// Get the deck content in form of a string
+// Get the Deck content in form of a string
 // For testing purposes only
 void Deck::getDeckStr(std::string &oStr){
     
@@ -72,11 +72,11 @@ void Deck::shuffle(){
     // From bottom of the the deck, swap every Card with another Card in the Deck.
     for (int i=0; i<lSize; i++)
     {
-        // Get a random number between i and lSize.
+        // Get a random number between i and lSize - i.
         lRandom = i + (rand() % (lSize -i));
         
         // lRandom will be the index of the Card betwen ith and the top.
-        // Swap the ith Card with the random Card .
+        // Swap the ith Card with the Card at the random position.
         std::swap(mCardUniPtrs[i],mCardUniPtrs[lRandom]);
     }
 }
@@ -90,6 +90,7 @@ std::unique_ptr<Card> Deck::dealOneCard(){
     
     // Hold the ownership of the Card in lCard while clear the last element in vector.
     std::unique_ptr<Card> lCard = std::move(mCardUniPtrs.back());
+    // Remove the unique_ptr at the end of the vector.
     mCardUniPtrs.pop_back();
     
     // Transfer the owner ship to the caller

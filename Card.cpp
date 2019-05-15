@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <sstream>
 
-// Constructor with parameters to set Suit and Rank
+// Constructor with parameters to set Suit and Rank.
 Card::Card(PokerSuit iSuit, PokerRank iRank){
     mSuit = iSuit;
     mRank = iRank;
@@ -35,14 +35,14 @@ PokerRank Card::getRank() const
     return mRank;
 }
 
-// For testing purposes only
+// For testing purposes only.
 std::string Card::getCardStr(){
     std::stringstream lSStr;
     lSStr<<mSuit<<"."<<mRank;
     return lSStr.str();
 }
 
-// Support judgement of Equal or Not Equal
+// Support judgement of Equal or Not Equal operators for testing purposes.
 bool operator == (const Card &iCard1, const Card &iCard2){
     return ((iCard1.mRank == iCard2.mRank) && (iCard1.mSuit == iCard2.mSuit));
 }

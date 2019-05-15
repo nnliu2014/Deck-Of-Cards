@@ -105,7 +105,7 @@ Deck Of Cards Assignment from Appian
  3. **testCardComparison** will test the == and != operators.
 
 ### Unit tests for Deck
- 1. **testDeckCreation** will check if the Deck created will have all the Cards created correctly.
+ 1. **testDeckCreation** will check if a new Deck created will have all the Cards created correctly.
  2. **testInitialShuffle** will check:
     -a. a permutation is done
     -b. no duplicate Cards

@@ -12,7 +12,7 @@
 //  be one of the four suits defined in PokerSuit combined with one of the face value defined
 //  in PokerRank.
 //  1. A Card instance can only be created by a Deck object thus no public constructor is exposed.
-//  2. Suit and Rank are read only as once created the card can't not be changed.
+//  2. Suit and Rank are read only properties as once created the card can't not be changed.
 //
 
 #ifndef Card_hpp
@@ -38,7 +38,7 @@ protected:
     // 2. Cards can only be created by a deck and then dealt out, or created in unit tests.
     Card(PokerSuit iSuit, PokerRank iRank);
     
-    // Copy constructor used for testing purpose only
+    // Copy constructor used for testing purposes only
     Card(const Card &iCard);
     
     // Method for testing purposes only, visable only to friend classes
