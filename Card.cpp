@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <sstream>
 
-// Constructor with parameters
+// Constructor with parameters to set Suit and Rank
 Card::Card(PokerSuit iSuit, PokerRank iRank){
     mSuit = iSuit;
     mRank = iRank;

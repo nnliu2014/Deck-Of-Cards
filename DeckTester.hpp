@@ -12,15 +12,16 @@
 //  1. testDeckCreation will check if the Deck created will have all the Cards created correctly.
 //  2. testInitialShuffle will check:
 //      a. a permutation is done
-//      b. no duplicate Cards
+//      b. no duplicated Cards
 //      Correctness of the Cards is not checked since only the contructor can create Cards.
-//  3. testDeckShuffleRandomness will check if multiple calls to shuffle will generate different
+//  3. testDeckShuffleRandomness will check if multiple calls to shuffle() will generate different
 //     random permutations. This is to ensure the fairness of the game.
 //  4. testMultipleDeckShuffle will check if shuffle calls to multiple Decks will generate different
 //     random permutations. This is also to ensure the fairness of the game.
-//  5. testDealOneCard will test the case of dealing from a fresh Deck or a Deck after one shuffle call.
-//  6. testDealCards will test the case where several cards are dealt continuously.
-//  7. testDealEmptyDeck will test the case when dealOneCard() is called when the deck is empty.
+//  5. testDealOneCard will test the case of dealing from a fresh Deck or a Deck after one shuffle
+//     call.
+//  6. testDealCards will test the case where several Cards are dealt continuously.
+//  7. testDealEmptyDeck will test the case when dealOneCard() is called when the Deck is empty.
 //  8. testShuffleAfterDealing will test the case when shuffle() is called on a partial Deck.
 //
 //  As explained in Deck.hpp, thread saftey is not tested in these test cases.

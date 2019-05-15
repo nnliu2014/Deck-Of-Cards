@@ -13,8 +13,9 @@
 //Default Constructor which will create the Cards automatically
 Deck::Deck()
 {
-    mCardUniPtrs.clear();
     // Initalize the deck of cards
+    mCardUniPtrs.clear();
+    
     try{
         //Seed the random number generation at construction time
         srand((unsigned int)time(0));
@@ -31,28 +32,6 @@ Deck::Deck()
         }
     }
     // Catch the memory allocation failure
-    catch(std::bad_alloc& ex){
-        mCardUniPtrs.clear();
-        exit(1);
-    }
-}
-
-// Copy constructor, for testing purposes only
-Deck::Deck(Deck &iDeck)
-{
-    //Initialize vector and style
-    try{
-        //seed the random number generation at construction time
-        srand((unsigned int)time(0));
-        
-        // Reserve the size of the vector to avoid repeating copy and allocation
-        // during expansion
-        mCardUniPtrs.reserve(iDeck.mCardUniPtrs.size());
-        for(int i = 0; i<iDeck.mCardUniPtrs.size(); i++){
-            mCardUniPtrs.push_back(std::unique_ptr<Card>
-                                   (new Card(iDeck.mCardUniPtrs[i]->getSuit(), iDeck.mCardUniPtrs[i]->getRank())));
-        }
-    }
     catch(std::bad_alloc& ex){
         mCardUniPtrs.clear();
         exit(1);
@@ -91,7 +70,7 @@ void Deck::shuffle(){
     int lSize = (int) mCardUniPtrs.size();
     
     // From bottom of the the deck, swap every Card with another Card in the Deck.
-    for (int i=0; i<mCardUniPtrs.size();i++)
+    for (int i=0; i<lSize; i++)
     {
         // Get a random number between i and lSize.
         lRandom = i + (rand() % (lSize -i));

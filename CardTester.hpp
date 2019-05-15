@@ -12,7 +12,7 @@
 //  1. testCardCreation will check if the Card created will have the right suit and rank.
 //  2. testCardValue will check if the correct value of suit and rank can be retrieved.
 //  3. testCardComparison will test the == and != operators.
-//  Several hardcoded cases will be tested in each function.
+//  Several hardcoded cases will be tested in each test.
 
 #ifndef CardTester_hpp
 #define CardTester_hpp

@@ -66,7 +66,7 @@ Deck Of Cards Assignment from Appian
      ==; and  !=;  //as friend functions, for testing purposes
 
      getCardStr(); //protected, for testing purposes
-#### Ownership and Lifetime of Card instances
+#### Ownership and lifetime of Card instances
  To avoid frauds in games, the Card shall have an exclusive ownership: either it is in a Deck of Cards or it has been dealt (to a player or on the table, etc.) The Card can only be created when a Deck is created. The Deck has the sole ownership of the Card until it is dealt, which will transfer its ownership to the caller.
 
 ### Deck
@@ -85,17 +85,13 @@ Deck Of Cards Assignment from Appian
 #### Constructors
      Deck(); //default constructor, public
 
-     Deck(&iDeck); //copy constructor, protected
-
- The copy constructor can only be invoked by friend classes for testing purposes.
-
 #### Other methods and operators
      getDeckStr(); //protected, for testing purposes
 
-#### Ownership and Lifetime of Deck instances
+#### Ownership and lifetime of Deck instances
  Similar to Cards, the lifetime and ownership of Deck shall also be handled with care in the system. Generally one Deck shall be managed/handled by one owner only.
 
- _Note: In line with the exclusive ownership, in the current design and implementation, thread safety is not considered. If in some cases concurrent accessing to one Deck is necessary, Smart locks can be added to all the member functions, but it might be more expensive._
+ _Note: In line with the exclusive ownership, in the current design and implementation, thread safety is not considered. If in some cases concurrent accessing to one Deck is necessary, smart locks can be added to all the member functions, but it might be more expensive._
 
 ### CardTester and DeckTester
  These are testing classes for Card and Deck Objects. They are friend classes of the two main classes and thus can access the non-public members and methods of the main classes.
@@ -113,10 +109,12 @@ Deck Of Cards Assignment from Appian
  2. **testInitialShuffle** will check:
     -a. a permutation is done
     -b. no duplicate Cards
- (Correctness of the Cards is not checked since only the constructor can create Cards.)
+ (correctness of the Cards is not checked since only the constructor can create Cards.)
  3. **testDeckShuffleRandomness** will check if multiple calls to shuffle will generate different random permutations. This is to ensure the fairness of the game.
  4. **testMultipleDeckShuffle** will check if shuffle calls to multiple Decks will generate different random permutations. This is also to ensure the fairness of the game.
  5. **testDealOneCard** will test the case of dealing from a fresh Deck or a Deck after one shuffle call.
  6. **testDealCards** will test the case where several cards are dealt continuously.
  7. **testDealEmptyDeck** will test the case when dealOneCard() is called when the deck is empty.
  8. **testShuffleAfterDealing** will test the case when shuffle() is called on a partial Deck.
+
+ _Notes: A more "perfect" test of shuffle() is to test the probability of a certain cards being shuffled to a certain position. Ideally, the probability of being shuffled to any position should be equal. However, it might be more efficient to prove it mathematically than to test it with code.
